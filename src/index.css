@@ -1,4 +1,13 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #647FBC;
 }
+
+#root {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* https://colorhunt.co/palette/647fbc91adc8aed6cffafdd6 */
