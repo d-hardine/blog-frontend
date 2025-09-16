@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 
-const Main = () => {
+const Home = () => {
   const [fruits, setFruits] = useState([])
 
   const fetchApi = async () => {
-    const response = await axios.get('http://localhost:3000/api')
+    const response = await axios.get('/api')
     setFruits(response.data)
   }
 
@@ -19,11 +19,11 @@ const Main = () => {
       <p>Whooooooo!</p>
       <ul>
         {fruits.map((fruit) => 
-          <li key={fruit.id}>{fruit.fruit}</li>
+          <li key={fruit.id}>dummy fetch from backend fruit: {fruit.fruit}</li>
         )}
       </ul>
     </div>
   );
 };
 
-export default Main;
+export default Home;

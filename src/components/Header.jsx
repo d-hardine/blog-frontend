@@ -9,6 +9,7 @@ function Header() {
             </div>
             <div className="right-container">
                 <Link to="Signup">Signup</Link>
+                <Link to="Login">Login</Link>
             </div>
         </header>
     )
