@@ -1,28 +1,32 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 import axios from 'axios'
+import PageTitle from '../components/PageTitle';
 
 const Home = () => {
-  const [fruits, setFruits] = useState([])
+  const [articles, setArticles] = useState([])
 
-  const fetchApi = async () => {
-    const response = await axios.get('/api')
-    setFruits(response.data)
+  const fetchArticles = async () => {
+    const response = await axios.get('/api/getArticles')
+    setArticles(response.data)
   }
 
   useEffect(() => {
-    fetchApi()
+    fetchArticles()
   }, [])
 
   return (
-    <div>
-      <h1>This is the main page!</h1>
-      <p>Whooooooo!</p>
-      <ul>
-        {fruits.map((fruit) => 
-          <li key={fruit.id}>dummy fetch from backend fruit: {fruit.fruit}</li>
-        )}
-      </ul>
-    </div>
+    <>
+      <PageTitle title="Hardine Blog" />
+      <main>
+        <p>Whooooooo!</p>
+        <ul>
+          {articles.map((article) =>
+            <li key={article.id}>Article: <Link to={`/article/${article.id}`}>{article.title}</Link></li>
+          )}
+        </ul>
+      </main>
+    </>
   );
 };
 
