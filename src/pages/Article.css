@@ -1,0 +1,9 @@
+.comment-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.comment-card {
+    background-color: #AED6CF;
+}

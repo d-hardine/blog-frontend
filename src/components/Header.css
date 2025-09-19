@@ -5,3 +5,8 @@ header {
     background-color: #91ADC8;
     color: #3F3F3F;
 }
+
+.right-container {
+    display: flex;
+    gap: 20px;
+}

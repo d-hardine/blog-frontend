@@ -8,6 +8,8 @@ const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
+  const [isAuthenticated, setIsAuthenticated, usernameGlobal, setUsernameGlobal] = useOutletContext()
+
   const navigate = useNavigate()
   
   async function handleLogin(e) {
@@ -19,6 +21,9 @@ const Login = () => {
     const response = await axios.post('/api/login', loginAttemptUser)
     if(response.status === 200) {
       localStorage.setItem("jwtToken", response.data.token)
+      localStorage.setItem("username", response.data.username)
+      localStorage.setItem("userId", response.data.userId)
+      setUsernameGlobal(response.data.username)
       navigate('/')
     }
   }

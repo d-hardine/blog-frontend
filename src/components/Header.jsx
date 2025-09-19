@@ -1,29 +1,15 @@
-import { Link } from 'react-router'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router'
 import './Header.css'
 
-function Header() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+function Header({isAuthenticated, setIsAuthenticated, usernameGlobal, setUsernameGlobal}) {
+    const navigate = useNavigate()
 
-    async function fetchAuth() {
-        const token = localStorage.getItem('jwtToken')
-        if(token) {
-            const response = await axios.get('/api/protected', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            console.log(response.status)
-            if(response.status === 200)
-                setIsAuthenticated(true)
-        }
+    const handleLogout = () => {
+        setIsAuthenticated(false)
+        setUsernameGlobal('')
+        localStorage.clear()
+        navigate('/')
     }
-
-    
-    useEffect(() => {
-        fetchAuth()
-    }, [])
 
     return (
         <header>
@@ -31,20 +17,17 @@ function Header() {
                 <Link to="/">Home</Link>
             </div>
             {isAuthenticated ? (
-                <>
                 <div className="right-container">
-                    <div>username</div>
-                    <Link to="Logout"><button>Logout</button></Link>
+                    <div>{usernameGlobal}</div>
+                    <button onClick={handleLogout}>Logout</button>
                 </div>
-                </>
-            ) : (
-                <>
+            ): (
                 <div className="right-container">
                     <Link to="Signup"><button>Signup</button></Link>
-                <   Link to="Login"><button>Login</button></Link>
+                    <Link to="Login"><button>Login</button></Link>
                 </div>
-                </>
             )}
+
         </header>
     )
 }
