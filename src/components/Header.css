@@ -6,7 +6,17 @@ header {
     color: #3F3F3F;
 }
 
-.right-container {
+.left-container, .right-container {
     display: flex;
     gap: 20px;
+    align-items: center;
+}
+
+.left-container {
+    font-family: Caveat;
+    text-decoration: none;
+    color: inherit;
+    font-size: 40px;
+    font-family: Caveat;
+    font-weight: bolder;
 }

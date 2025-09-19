@@ -7,16 +7,15 @@ import { fetchAuth } from './utils'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [usernameGlobal, setUsernameGlobal] = useState('')
 
   useEffect(() => {
-    fetchAuth(setIsAuthenticated, setUsernameGlobal)
-  }, [isAuthenticated, usernameGlobal])
+    fetchAuth(setIsAuthenticated)
+  }, [isAuthenticated])
 
   return (
     <>
-      <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} usernameGlobal={usernameGlobal} setUsernameGlobal={setUsernameGlobal} />
-      <Outlet context={[isAuthenticated, setIsAuthenticated, usernameGlobal, setUsernameGlobal]}/>
+      <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+      <Outlet context={[isAuthenticated, setIsAuthenticated]}/>
       <Footer />
     </>
   )

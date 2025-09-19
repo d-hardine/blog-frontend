@@ -6,7 +6,7 @@ import PageTitle from "../components/PageTitle"
 import './Article.css'
 
 const Article = () => {
-    const [isAuthenticated, setIsAuthenticated, usernameGlobal, setUsernameGlobal] = useOutletContext()
+    const [isAuthenticated, setIsAuthenticated] = useOutletContext()
 
     const [article, setArticle] = useState({})
     const [author, setAuthor] = useState({})
@@ -19,7 +19,7 @@ const Article = () => {
 
     const fetchSingleArticle = async () => {
         let response = await axios.get(`/api/getArticle/${articleId}`)
-        response.data.createdAt = formatDate(response.data.createdAt, 'MM/dd/yyyy, HH:mm')
+        response.data.createdAt = formatDate(response.data.createdAt, 'dd MMM yyyy, HH:mm')
         setArticle(response.data)
         setAuthor(response.data.author)
     }
@@ -70,7 +70,7 @@ const Article = () => {
                 <div className="comment-card" key={comment.id}>
                     <div>comment author: {comment.author.username}</div>
                     <div>comment content: {comment.body}</div>
-                    <div>comment date: {formatDate(comment.createdAt, 'MMM/dd/yyyy, HH:mm')}</div>
+                    <div>comment date: {formatDate(comment.createdAt, 'dd MMM yyyy, HH:mm')}</div>
                 </div>
             ))}
             </div>

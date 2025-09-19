@@ -1,0 +1,25 @@
+.article-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.article-categories {
+    color: #00007f;
+    font-weight: 600;
+}
+
+.article-title {
+    font-size: xx-large;
+    font-weight: 320;
+}
+
+.article-title > a {
+    text-decoration: none;
+    color: #004861;
+}
+
+.article-title > a:hover {
+    color: #017298;
+    cursor: pointer;
+}

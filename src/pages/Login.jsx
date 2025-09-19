@@ -8,7 +8,7 @@ const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const [isAuthenticated, setIsAuthenticated, usernameGlobal, setUsernameGlobal] = useOutletContext()
+  const [isAuthenticated] = useOutletContext()
 
   const navigate = useNavigate()
   
@@ -23,9 +23,13 @@ const Login = () => {
       localStorage.setItem("jwtToken", response.data.token)
       localStorage.setItem("username", response.data.username)
       localStorage.setItem("userId", response.data.userId)
-      setUsernameGlobal(response.data.username)
       navigate('/')
+      window.location.reload(false);
     }
+  }
+
+  if(isAuthenticated) {
+    navigate('/')
   }
 
   return (
