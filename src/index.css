@@ -16,4 +16,24 @@ main {
   margin: 20px 200px;
 }
 
+button {
+  background-color: #FAFDD6;
+  width: 100px;
+  height: 35px;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+textarea {
+  resize: none;
+  width: 60%;
+  height: 60px;
+  padding: 10px;
+}
+
 /* https://colorhunt.co/palette/647fbc91adc8aed6cffafdd6 */

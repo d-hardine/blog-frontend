@@ -1,7 +1,7 @@
 header {
     display: flex;
     justify-content: space-between;
-    padding: 30px;
+    padding: 20px 200px;
     background-color: #91ADC8;
     color: #3F3F3F;
 }

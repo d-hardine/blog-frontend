@@ -1,3 +1,7 @@
+.article-author-and-date {
+    color: #3F3F3F;
+}
+
 .comment-card-container {
     display: flex;
     flex-direction: column;
@@ -6,4 +10,11 @@
 
 .comment-card {
     background-color: #AED6CF;
+    padding: 10px;
+    width: 60%;
+}
+
+.comment-card-top {
+    display: flex;
+    justify-content: space-between;
 }

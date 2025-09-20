@@ -10,7 +10,6 @@ const Home = () => {
 
   const fetchArticles = async () => {
     const response = await axios.get('/api/getArticles')
-    console.log(response.data)
     setArticles(response.data)
   }
 

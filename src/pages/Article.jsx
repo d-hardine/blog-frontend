@@ -1,5 +1,5 @@
 import axios from "axios"
-import { formatDate } from "date-fns"
+import { formatDate, formatDistance } from "date-fns"
 import { useEffect, useState } from "react"
 import { useParams, useOutletContext } from "react-router"
 import PageTitle from "../components/PageTitle"
@@ -58,29 +58,34 @@ const Article = () => {
         <>
         <PageTitle title={`${article.title} | Hardine Blog`} />
         <main>
-            <div>Title: {article.title}</div>
-            <div>Body: {article.body}</div>
-            <div>Created at: {article.createdAt}</div>
-            <div>Written By : {author.firstName} {author.lastName}</div>
-            <hr />
-            <div>comment section</div>
+            <div className="article-title">{article.title}</div>
+            <div className="article-author-and-date">by {author.firstName} {author.lastName} on {article.createdAt}</div>
+            <br />
+            <div>{article.body}</div>
+            <br />
+            <div className="comment-section"><b>COMMENTS</b></div>
             <hr />
             <div className="comment-card-container">
-            {comments.map((comment) => (
-                <div className="comment-card" key={comment.id}>
-                    <div>comment author: {comment.author.username}</div>
-                    <div>comment content: {comment.body}</div>
-                    <div>comment date: {formatDate(comment.createdAt, 'dd MMM yyyy, HH:mm')}</div>
-                </div>
-            ))}
-            </div>
             {isAuthenticated && (
                 <form action="/api/comment" onSubmit={submitComment} method="post">
-                    <label htmlFor="newComment" id="newComment"></label>
-                    <textarea name="newComment" id="newComment" onChange={(e) => setNewComment(e.target.value)}></textarea>
+                    <label htmlFor="newComment" id="newComment"><b>{localStorage.getItem('username')}</b></label>
+                    <br />
+                    <textarea name="newComment" id="newComment" maxLength={150} onChange={(e) => setNewComment(e.target.value)}></textarea>
+                    <br />
                     <button>Comment</button>
                 </form>
             )}
+            {comments.map((comment) => (
+                <div className="comment-card" key={comment.id}>
+                    <div className="comment-card-top">
+                        <div><b>{comment.author.username}</b></div>
+                        <div title={formatDate(comment.createdAt, 'dd MMM yyyy, HH:mm')}>{formatDistance(comment.createdAt, new Date(), {addSuffix: true})}</div>
+                    </div>
+                    <br />
+                    <div>{comment.body}</div>
+                </div>
+            ))}
+            </div>
         </main>
         </>
     )
