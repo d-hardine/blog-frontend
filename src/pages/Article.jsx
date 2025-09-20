@@ -1,8 +1,9 @@
 import axios from "axios"
 import { formatDate, formatDistance } from "date-fns"
 import { useEffect, useState } from "react"
-import { useParams, useOutletContext } from "react-router"
+import { useParams, useOutletContext, Link } from "react-router"
 import PageTitle from "../components/PageTitle"
+import Navigation from "../components/Navigation"
 import './Article.css'
 
 const Article = () => {
@@ -11,7 +12,6 @@ const Article = () => {
     const [article, setArticle] = useState({})
     const [author, setAuthor] = useState({})
     const [comments, setComments] = useState([])
-
     const [newComment, setNewComment] = useState('')
 
     const pageParams = useParams()
@@ -58,11 +58,16 @@ const Article = () => {
         <>
         <PageTitle title={`${article.title} | Hardine Blog`} />
         <main>
-            <div className="article-title">{article.title}</div>
-            <div className="article-author-and-date">by {author.firstName} {author.lastName} on {article.createdAt}</div>
-            <br />
-            <div>{article.body}</div>
-            <br />
+            <div className="article-container">
+                <div className="article-container-left">
+                    <div className="article-title">{article.title}</div>
+                    <div className="article-author-and-date">by {author.firstName} {author.lastName} on {article.createdAt}</div>
+                    <br />
+                    <div>{article.body}</div>
+                    <br />
+                </div>
+                <Navigation />
+            </div>
             <div className="comment-section"><b>COMMENTS</b></div>
             <hr />
             <div className="comment-card-container">

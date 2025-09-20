@@ -1,0 +1,15 @@
+.search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+li > a {
+    text-decoration: none;
+    color: rgb(0, 53, 139);
+}
+
+li > a:hover {
+    cursor: pointer;
+    color: rgb(0, 76, 199);
+}
