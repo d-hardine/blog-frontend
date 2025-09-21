@@ -3,19 +3,40 @@ import './App.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import { useState, useEffect } from 'react'
-import { fetchAuth } from './utils'
+import axios from "axios"
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [loggedUsername, setLoggedUsername] = useState('')
+
+  async function fetchAuth() {
+    const token = localStorage.getItem('jwtToken')
+    if(token) {
+      try {
+        const response = await axios.get('/api/auth', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        if(response.status === 200) {
+          setLoggedUsername(response.data.username)
+        }
+      } catch (err) {
+        localStorage.clear()
+        console.error("You're logged out. Please login again.")
+      }
+    } else {
+        console.log('not authenticated')
+    }
+}
 
   useEffect(() => {
-    fetchAuth(setIsAuthenticated)
-  }, [isAuthenticated])
+    fetchAuth()
+  }, [loggedUsername])
 
   return (
     <>
-      <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
-      <Outlet context={[isAuthenticated, setIsAuthenticated]}/>
+      <Header loggedUsername={loggedUsername} setLoggedUsername={setLoggedUsername}/>
+      <Outlet context={[loggedUsername, setLoggedUsername]}/>
       <Footer />
     </>
   )

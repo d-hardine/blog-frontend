@@ -7,7 +7,7 @@ import Navigation from "../components/Navigation"
 import './Article.css'
 
 const Article = () => {
-    const [isAuthenticated, setIsAuthenticated] = useOutletContext()
+    const [loggedUsername, setLoggedUsername] = useOutletContext()
 
     const [article, setArticle] = useState({})
     const [author, setAuthor] = useState({})
@@ -80,9 +80,9 @@ const Article = () => {
             <div className="comment-section"><b>COMMENTS</b></div>
             <hr />
             <div className="comment-card-container">
-            {isAuthenticated && (
+            {loggedUsername && (
                 <form action="/api/comment" onSubmit={submitComment} method="post">
-                    <label htmlFor="newComment" id="newComment"><b>{localStorage.getItem('username')}</b></label>
+                    <label htmlFor="newComment" id="newComment"><b>{loggedUsername}</b></label>
                     <br />
                     <textarea name="newComment" id="newComment" maxLength={150} onChange={(e) => setNewComment(e.target.value)}></textarea>
                     <br />

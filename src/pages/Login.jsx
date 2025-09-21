@@ -8,7 +8,7 @@ const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const [isAuthenticated] = useOutletContext()
+  const [loggedUsername, setLoggedUsername] = useOutletContext()
 
   const navigate = useNavigate()
   
@@ -21,13 +21,13 @@ const Login = () => {
     const response = await axios.post('/api/login', loginAttemptUser)
     if(response.status === 200) {
       localStorage.setItem("jwtToken", response.data.token)
-      localStorage.setItem("username", response.data.username)
+      //setLoggedUsername(response.data.username)
       navigate('/')
       window.location.reload(false);
     }
   }
 
-  if(isAuthenticated) {
+  if(loggedUsername) {
     navigate('/')
   }
 
