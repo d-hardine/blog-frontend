@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import axios from "axios"
 import './Navigation.css'
 
 function Navigation() {
     const [categories, setCategories] = useState([])
+    const [searchInput, setSearchInput] = useState('')
 
+    const navigate = useNavigate()
 
     const fetchCategories = async () => {
         const response = await axios.get('/api/getCategories')
@@ -16,12 +18,18 @@ function Navigation() {
         fetchCategories()
     }, [])
 
+    const handleSearch = async (e) => {
+        e.preventDefault()
+        if(searchInput)
+            navigate(`/search?q=${searchInput}`)
+    }
+
     return (
         <div className="Navigation-container">
             <h2>Search</h2>
-            <form action="" className='search-form'>
+            <form onSubmit={handleSearch} className='search-form'>
                     <label htmlFor="search-article" id="search-article"></label>
-                    <input type="text" name="search-article" id="search-article" />
+                    <input type="text" name="search-article" id="search-article" onChange={(e) => setSearchInput(e.target.value)} />
                     <button>Search</button>
                 </form>
                 <h2>Categories</h2>

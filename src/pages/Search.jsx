@@ -1,31 +1,33 @@
-import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router'
-import axios from 'axios'
+import { useEffect, useState } from "react"
+import axios from "axios"
+import { useSearchParams, Link } from "react-router"
 import { formatDate, formatDistance } from 'date-fns'
 import PageTitle from '../components/PageTitle'
-import './Home.css'
-import Navigation from '../components/Navigation'
+import Navigation from "../components/Navigation"
 
-const Category = () => {
+const Search = () => {
     const [articles, setArticles] = useState([])
+    const [searchParams] = useSearchParams()
 
-    const pageParams = useParams()
-
-    const fetchArticles = async () => {
-        const response = await axios.get(`/api/getArticles/${pageParams.categoryName}`)
-        setArticles(response.data)
+    const fetchSearch = async () => {
+        try {
+            const response = await axios.get(`/api/searchArticles?q=${searchParams.get('q')}`)
+            setArticles(response.data)
+        } catch (error) {
+            console.error('Error during search:', error);
+        }
     }
 
     useEffect(() => {
-        fetchArticles()
-    }, [pageParams.categoryName])
+        fetchSearch()
+    }, [searchParams.get('q')])
 
     return (
-    <>
-        <PageTitle title={`Category: ${pageParams.categoryName} | Hardine Blog`}/>
-        <main className='main-homepage'>
+        <>
+        <PageTitle title={`Search for "${searchParams.get('q')}" | Hardine Blog`} />
+        <main className="main-homepage">
             <div className="main-homepage-left">
-                <h2 className='latest-article'>Category: {pageParams.categoryName}</h2>
+                <h2 className='latest-article'>Search for "{searchParams.get('q')}"</h2>
                 <div className='article-card-container'>
                     {articles.map((article) =>
                         <div key={article.id} className='article-card'>
@@ -41,7 +43,7 @@ const Category = () => {
             <Navigation />
         </main>
         </>
-    );
-};
+    )
+}
 
-export default Category;
+export default Search

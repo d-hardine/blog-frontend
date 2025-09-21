@@ -8,6 +8,7 @@ import Signup from './pages/Signup.jsx'
 import Login from './pages/Login.jsx'
 import Article from './pages/Article.jsx'
 import Category from './pages/Category.jsx'
+import Search from './pages/Search.jsx'
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       {path: 'login', element: <Login />},
       {path: 'category/:categoryName', element: <Category/>},
       {path: 'article/:articleId', element: <Article />},
+      {path: 'search', element: <Search />}
     ]
   },
 ])
