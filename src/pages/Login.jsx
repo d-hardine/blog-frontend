@@ -22,7 +22,6 @@ const Login = () => {
     if(response.status === 200) {
       localStorage.setItem("jwtToken", response.data.token)
       localStorage.setItem("username", response.data.username)
-      localStorage.setItem("userId", response.data.userId)
       navigate('/')
       window.location.reload(false);
     }

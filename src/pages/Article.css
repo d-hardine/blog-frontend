@@ -16,11 +16,28 @@
 
 .comment-card {
     background-color: #AED6CF;
-    padding: 10px;
-    width: 60%;
+    width: 65%;
+    min-height: 100px;
+
 }
 
 .comment-card-top {
     display: flex;
     justify-content: space-between;
+    background-color: aliceblue;
+    padding: 10px;
+}
+
+.comment-card-top-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comment-body {
+    padding: 20px 10px;
+}
+
+.icon {
+    cursor: pointer;
 }
