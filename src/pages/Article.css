@@ -7,37 +7,3 @@
 .article-author-and-date {
     color: #3F3F3F;
 }
-
-.comment-card-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.comment-card {
-    background-color: #AED6CF;
-    width: 65%;
-    min-height: 100px;
-
-}
-
-.comment-card-top {
-    display: flex;
-    justify-content: space-between;
-    background-color: aliceblue;
-    padding: 10px;
-}
-
-.comment-card-top-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.comment-body {
-    padding: 20px 10px;
-}
-
-.icon {
-    cursor: pointer;
-}
