@@ -2,6 +2,7 @@ import axios from "axios"
 import { formatDate } from "date-fns"
 import { useEffect, useState } from "react"
 import { useParams, useOutletContext } from "react-router"
+import parse from 'html-react-parser'
 import PageTitle from "../components/PageTitle"
 import Navigation from "../components/Navigation"
 import Comments from "../components/Comments"
@@ -21,6 +22,8 @@ const Article = () => {
     const fetchSingleArticle = async () => {
         let response = await axios.get(`/api/getArticle/${articleId}`)
         response.data.createdAt = formatDate(response.data.createdAt, 'dd MMM yyyy, HH:mm')
+        response.data.updatedAt = formatDate(response.data.updatedAt, 'dd MMM yyyy, HH:mm')
+        response.data.body = parse(response.data.body)
         setArticle(response.data)
         setAuthor(response.data.author)
     }
