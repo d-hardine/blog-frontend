@@ -11,6 +11,8 @@ const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8100'
   
   const navigate = useNavigate()
 
@@ -24,7 +26,7 @@ const Signup = () => {
       password,
       confirmPassword
     }
-    const response = await axios.post('/api/signup', newUser)
+    const response = await axios.post(`${API_BASE_URL}/api/signup`, newUser)
     console.log(response)
     if(response.status === 201)
       navigate('/')

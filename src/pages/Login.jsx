@@ -8,6 +8,8 @@ const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8100'
+
   const [loggedUsername, setLoggedUsername] = useOutletContext()
 
   const navigate = useNavigate()
@@ -18,7 +20,7 @@ const Login = () => {
       username,
       password,
     }
-    const response = await axios.post('/api/login', loginAttemptUser)
+    const response = await axios.post(`${API_BASE_URL}/api/login`, loginAttemptUser)
     if(response.status === 200) {
       localStorage.setItem("jwtToken", response.data.token)
       //setLoggedUsername(response.data.username)

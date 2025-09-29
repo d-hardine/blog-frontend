@@ -9,8 +9,10 @@ import Navigation from '../components/Navigation'
 const Home = () => {
   const [articles, setArticles] = useState([])
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8100'
+
   const fetchArticles = async () => {
-    const response = await axios.get('/api/getArticles')
+    const response = await axios.get(`${API_BASE_URL}/api/getArticles`)
     setArticles(response.data)
   }
 

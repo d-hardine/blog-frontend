@@ -7,10 +7,12 @@ function Navigation() {
     const [categories, setCategories] = useState([])
     const [searchInput, setSearchInput] = useState('')
 
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8100'
+
     const navigate = useNavigate()
 
     const fetchCategories = async () => {
-        const response = await axios.get('/api/getCategories')
+        const response = await axios.get(`${API_BASE_URL}/api/getCategories`)
         setCategories(response.data)
     }
 

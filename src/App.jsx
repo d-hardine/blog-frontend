@@ -8,11 +8,13 @@ import axios from "axios"
 function App() {
   const [loggedUsername, setLoggedUsername] = useState('')
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8100'
+
   async function fetchAuth() {
     const token = localStorage.getItem('jwtToken')
     if(token) {
       try {
-        const response = await axios.get('/api/auth', {
+        const response = await axios.get(`${API_BASE_URL}/api/auth`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

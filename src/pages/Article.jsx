@@ -19,8 +19,10 @@ const Article = () => {
     const pageParams = useParams()
     const articleId = pageParams.articleId
 
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8100'
+
     const fetchSingleArticle = async () => {
-        let response = await axios.get(`/api/getArticle/${articleId}`)
+        let response = await axios.get(`${API_BASE_URL}/api/getArticle/${articleId}`)
         response.data.createdAt = formatDate(response.data.createdAt, 'dd MMM yyyy, HH:mm')
         response.data.updatedAt = formatDate(response.data.updatedAt, 'dd MMM yyyy, HH:mm')
         response.data.body = parse(response.data.body)
@@ -29,7 +31,7 @@ const Article = () => {
     }
 
     const fetchComments = async () => {
-        const commentResponse = await axios.get(`/api/getComments/${articleId}`)
+        const commentResponse = await axios.get(`${API_BASE_URL}/api/getComments/${articleId}`)
         setComments(commentResponse.data)
     }
 
@@ -41,7 +43,7 @@ const Article = () => {
     const submitComment = async (e) => {
         e.preventDefault()
         if(newComment.length > 0) { //if the new comment is not empty
-            await axios.post('/api/postNewComment', {
+            await axios.post(`${API_BASE_URL}/api/postNewComment`, {
                 articleId: article.id,
                 newComment
             }, {

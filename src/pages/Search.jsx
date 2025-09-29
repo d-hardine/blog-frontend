@@ -9,9 +9,11 @@ const Search = () => {
     const [articles, setArticles] = useState([])
     const [searchParams] = useSearchParams()
 
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8100'
+
     const fetchSearch = async () => {
         try {
-            const response = await axios.get(`/api/searchArticles?q=${searchParams.get('q')}`)
+            const response = await axios.get(`${API_BASE_URL}/api/searchArticles?q=${searchParams.get('q')}`)
             setArticles(response.data)
         } catch (error) {
             console.error('Error during search:', error);

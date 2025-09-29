@@ -8,8 +8,10 @@ const Comments = ({comment, loggedUsername, setComments, articleId}) => {
     const [editMode, setEditMode] = useState(false)
     const [editComment, setEditComment] = useState(comment.body)
 
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8100'
+
     const fetchAuthIsAdmin = async () => {
-        await axios.get('/api/auth', {
+        await axios.get(`${API_BASE_URL}/api/auth`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
             }
@@ -26,7 +28,7 @@ const Comments = ({comment, loggedUsername, setComments, articleId}) => {
     }, [])
 
     const handleDelete = async (commentId) => {
-        const response = await axios.delete('/api/delete', {
+        const response = await axios.delete(`${API_BASE_URL}/api/delete`, {
             data: {
                 commentId,
                 articleId,
@@ -37,7 +39,7 @@ const Comments = ({comment, loggedUsername, setComments, articleId}) => {
 
     const handleEditComment = async (e, commentId) => {
         e.preventDefault()
-        const response = await axios.put('/api/edit', {
+        const response = await axios.put(`${API_BASE_URL}/api/edit`, {
             commentId,
             articleId,
             editComment
